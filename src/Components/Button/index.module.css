@@ -1,0 +1,29 @@
+.add-card{
+    margin: 10px;
+    width: 332px;
+    height: 64px;
+    left: 224px;
+    top: 64px;
+    font-family: 'Arial Black';
+    font-style: normal;
+    font-weight: 900;
+    font-size: 16px;
+    line-height: 32px;
+  }
+
+  @media screen and (min-width: 821px) {
+    .add-card{
+      background-color: #EF6F09;
+      color: white;
+      width: 200px;
+      border: 0px;  
+    }
+  }
+  @media screen and (max-width: 820px) {
+    .add-card{
+      background-color: white;
+      color: #EF6F09;
+      width: 95%;
+      font-size: 20px;
+    }
+  }
