@@ -14,10 +14,11 @@ const cardObject = {
 function useListing(){
     const [cardList, setCardList] = useState([cardObject])
     const [disable, setDisable] = useState(false)             // This state property is used to enable/disable the 'Add Block' button.
-    const [Uid, setUid] = useState(1)                         // This property will be used to set the Unique Id to newly added card.
+    //const [Uid, setUid] = useState(1)                         // This property will be used to set the Unique Id to newly added card.
     const navigate = useNavigate()
     const params = useParams()                                // useParam() hook is used to get the parameters from the URL.
-    
+    let latestUid = parseInt(params['Uid'])
+
     // useEffect will maintain the state on the basis of Uid in URL, 
     // update the Uid in the URL when new card is added and rerender the component.
 
@@ -25,7 +26,6 @@ function useListing(){
     // But, with the consideration that this data will come from a API, then the API can be 
     // called from the same useEffect() hook.
     useEffect(() => {
-      let latestUid = parseInt(params['Uid'])
       let list = []
       if(!isNaN(latestUid)){
           for(let i=1; i<=latestUid; i++){
@@ -36,20 +36,20 @@ function useListing(){
           setCardList([{ ...cardObject, Uid: 1}])
           navigate('/1')
       }
-    }, [params, navigate])
+    }, [latestUid, navigate])
 
     // This will handle the 'Add block' click event.
     // It will add the new card in card list
     // Disable the 'Add block' button for 5 second
     // And update the URL with new Uid.
     const onClick = useCallback(() => {
-        const newId = Uid + 1
+        let newId = latestUid + 1
         setCardList((prevState) => ([...prevState, {...cardObject , Uid: newId}]))
-        setUid(newId)
+        //setUid(newId)
         setDisable(true)
         navigate('/' + newId)
         setTimeout(() => setDisable(false), 5000);
-    }, [Uid, navigate])
+    }, [latestUid, navigate])
 
     return {onClick, cardList, disable}
 }
