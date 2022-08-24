@@ -14,8 +14,7 @@ const cardObject = {
 function useListing(){
     const [cardList, setCardList] = useState([cardObject])
     const [disable, setDisable] = useState(false)             // This state property is used to enable/disable the 'Add Block' button.
-    //const [Uid, setUid] = useState(1)                         // This property will be used to set the Unique Id to newly added card.
-    const navigate = useNavigate()
+    const navigate = useNavigate()                            // This hook is used to navigate from one URL to another.
     const params = useParams()                                // useParam() hook is used to get the parameters from the URL.
     let latestUid = parseInt(params['Uid'])
 
@@ -45,7 +44,6 @@ function useListing(){
     const onClick = useCallback(() => {
         let newId = latestUid + 1
         setCardList((prevState) => ([...prevState, {...cardObject , Uid: newId}]))
-        //setUid(newId)
         setDisable(true)
         navigate('/' + newId)
         setTimeout(() => setDisable(false), 5000);
